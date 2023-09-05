@@ -9,4 +9,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface SettingRepositoryInterface extends RepositoryInterface
 {
     public function finAllBySection(string $section): array;
+
+    public function finAllBySectionAndKeys(string $section, array $keys): array;
 }
