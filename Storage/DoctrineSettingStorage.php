@@ -41,6 +41,7 @@ class DoctrineSettingStorage implements SettingStorageInterface
 
         foreach ($values as $settingName => $value) {
             if (array_key_exists($settingName, $existingSettings)) {
+                /** @var SettingInterface $existSetting */
                 $existSetting = $existingSettings[$settingName];
 
                 if ($existSetting->getValue() === $value) {
@@ -50,7 +51,7 @@ class DoctrineSettingStorage implements SettingStorageInterface
                 $existSetting->setValue($value);
                 $existSetting->setUpdatedAt(new \DateTime());
             } else {
-                /** @var SettingInterface $persistedSetting */
+                /** @var SettingInterface $newSetting */
                 $newSetting = new $this->settingClass();
                 $newSetting->setSection($sectionName);
                 $newSetting->setName($settingName);
@@ -69,6 +70,7 @@ class DoctrineSettingStorage implements SettingStorageInterface
         $existingSettingsWithKey = [];
         $existSettings = $this->repositorySetting->finAllBySection($sectionName);
 
+        /** @var SettingInterface $setting */
         foreach ($existSettings as $setting) {
             $existingSettingsWithKey[$setting->getName()] = $setting;
         }
