@@ -29,7 +29,7 @@ class Setting implements SettingInterface
     {
         $this->createdAt = new \DateTime();
     }
-    
+
     public function getId()
     {
         return $this->id;

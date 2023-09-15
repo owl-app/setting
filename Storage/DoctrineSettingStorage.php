@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Owl\Component\Setting\Storage;
 
 use Doctrine\ORM\EntityManagerInterface;
-
 use Owl\Component\Setting\Model\SettingInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Owl\Component\Setting\Repository\SettingRepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+
 /**
  * @property SettingRepositoryInterface $repositorySetting
  */
@@ -17,7 +17,7 @@ class DoctrineSettingStorage implements SettingStorageInterface
     public function __construct(
         private string $settingClass,
         private RepositoryInterface $repositorySetting,
-        private EntityManagerInterface $settingManager
+        private EntityManagerInterface $settingManager,
     ) {
     }
 
@@ -35,7 +35,7 @@ class DoctrineSettingStorage implements SettingStorageInterface
 
     public function saveValues(string $sectionName, array $values, ?array $existingSettings = [], string $lang = 'pl'): void
     {
-        if(is_null($existingSettings)) {
+        if (null === $existingSettings) {
             $existingSettings = $this->loadBySection($sectionName);
         }
 
